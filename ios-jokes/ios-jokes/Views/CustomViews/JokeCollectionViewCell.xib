@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="JokeCollectionViewCell" customModule="Jokes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="480"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="290" height="480"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2r-Ge-3dd">
+                        <rect key="frame" x="0.0" y="0.0" width="290" height="480"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JOKE COMES HERE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uK1-L9-BxB">
+                                <rect key="frame" x="20" y="230" width="250" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uK1-L9-BxB" firstAttribute="centerY" secondItem="b2r-Ge-3dd" secondAttribute="centerY" id="Ipm-4D-tge"/>
+                            <constraint firstItem="uK1-L9-BxB" firstAttribute="centerX" secondItem="b2r-Ge-3dd" secondAttribute="centerX" id="Jwl-Xs-yVZ"/>
+                            <constraint firstAttribute="trailing" secondItem="uK1-L9-BxB" secondAttribute="trailing" constant="20" id="ogo-Up-0VV"/>
+                            <constraint firstItem="uK1-L9-BxB" firstAttribute="leading" secondItem="b2r-Ge-3dd" secondAttribute="leading" constant="20" id="u1v-KT-HWN"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="b2r-Ge-3dd" secondAttribute="bottom" id="LlZ-Dg-Rbc"/>
+                <constraint firstItem="b2r-Ge-3dd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ovu-mn-QT9"/>
+                <constraint firstAttribute="trailing" secondItem="b2r-Ge-3dd" secondAttribute="trailing" id="qLG-bv-Sp0"/>
+                <constraint firstItem="b2r-Ge-3dd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="yXV-ZV-qoW"/>
+            </constraints>
+            <size key="customSize" width="204" height="138"/>
+            <connections>
+                <outlet property="containerView" destination="b2r-Ge-3dd" id="kkn-dG-FDg"/>
+                <outlet property="jokeLabel" destination="uK1-L9-BxB" id="TxM-9b-T6j"/>
+            </connections>
+            <point key="canvasLocation" x="243.47826086956525" y="141.29464285714286"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
