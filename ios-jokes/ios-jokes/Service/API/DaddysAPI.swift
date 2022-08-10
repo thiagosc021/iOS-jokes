@@ -17,12 +17,21 @@ public enum APIType: String, CaseIterable {
     case Daddys
     case ChuckNorris
     
-    func description() -> String {
+    var description: String {
         switch self {
         case .Daddys:
             return "Daddy's jokes API"
         case .ChuckNorris:
             return "Chuck Norris jokes API"
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .Daddys:
+            return "brain.head.profile"
+        case .ChuckNorris:
+            return "bolt.fill"
         }
     }
 }
@@ -32,7 +41,7 @@ public enum DownloadError: Error {
   case decoderError
   case error
     
-    func description() -> String {
+    var description: String {
         switch self {
         case .statusNotOk:
             return "Something went wront with the API call!"

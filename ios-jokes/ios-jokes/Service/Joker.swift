@@ -44,7 +44,7 @@ public class Joker {
                 
                 guard let joke = joke else {
                     if let error = error {
-                        debugPrint(error.description())
+                        debugPrint(error.description)
                     }
                     return
                 }
