@@ -18,19 +18,47 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2r-Ge-3dd">
-                        <rect key="frame" x="0.0" y="0.0" width="290" height="480"/>
+                        <rect key="frame" x="10" y="10" width="270" height="460"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JOKE COMES HERE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uK1-L9-BxB">
-                                <rect key="frame" x="20" y="230" width="250" height="20.5"/>
+                                <rect key="frame" x="20" y="220" width="230" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhp-bG-BuW">
+                                <rect key="frame" x="220" y="10" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HOg-JI-hCQ"/>
+                                    <constraint firstAttribute="width" constant="40" id="bvg-Lg-wzo"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="favoriteButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="MZB-jd-HG5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yqa-th-Nn0">
+                                <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Yqa-th-Nn0" secondAttribute="height" multiplier="1:1" id="OGP-2e-xzz"/>
+                                    <constraint firstAttribute="height" constant="40" id="vdV-1O-4Hp"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="blockButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="L4F-WQ-OLd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="qhp-bG-BuW" firstAttribute="top" secondItem="b2r-Ge-3dd" secondAttribute="top" constant="10" id="0ey-Rp-CYZ"/>
+                            <constraint firstItem="Yqa-th-Nn0" firstAttribute="top" secondItem="b2r-Ge-3dd" secondAttribute="top" constant="10" id="HPE-SR-3wo"/>
                             <constraint firstItem="uK1-L9-BxB" firstAttribute="centerY" secondItem="b2r-Ge-3dd" secondAttribute="centerY" id="Ipm-4D-tge"/>
                             <constraint firstItem="uK1-L9-BxB" firstAttribute="centerX" secondItem="b2r-Ge-3dd" secondAttribute="centerX" id="Jwl-Xs-yVZ"/>
+                            <constraint firstAttribute="trailing" secondItem="qhp-bG-BuW" secondAttribute="trailing" constant="10" id="SFa-Oo-SY5"/>
+                            <constraint firstItem="Yqa-th-Nn0" firstAttribute="leading" secondItem="b2r-Ge-3dd" secondAttribute="leading" constant="10" id="fj4-ZO-LfK"/>
                             <constraint firstAttribute="trailing" secondItem="uK1-L9-BxB" secondAttribute="trailing" constant="20" id="ogo-Up-0VV"/>
                             <constraint firstItem="uK1-L9-BxB" firstAttribute="leading" secondItem="b2r-Ge-3dd" secondAttribute="leading" constant="20" id="u1v-KT-HWN"/>
                         </constraints>
@@ -39,14 +67,16 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="b2r-Ge-3dd" secondAttribute="bottom" id="LlZ-Dg-Rbc"/>
-                <constraint firstItem="b2r-Ge-3dd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ovu-mn-QT9"/>
-                <constraint firstAttribute="trailing" secondItem="b2r-Ge-3dd" secondAttribute="trailing" id="qLG-bv-Sp0"/>
-                <constraint firstItem="b2r-Ge-3dd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="yXV-ZV-qoW"/>
+                <constraint firstAttribute="bottom" secondItem="b2r-Ge-3dd" secondAttribute="bottom" constant="10" id="LlZ-Dg-Rbc"/>
+                <constraint firstItem="b2r-Ge-3dd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="ovu-mn-QT9"/>
+                <constraint firstAttribute="trailing" secondItem="b2r-Ge-3dd" secondAttribute="trailing" constant="10" id="qLG-bv-Sp0"/>
+                <constraint firstItem="b2r-Ge-3dd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="yXV-ZV-qoW"/>
             </constraints>
             <size key="customSize" width="204" height="138"/>
             <connections>
+                <outlet property="blockButton" destination="Yqa-th-Nn0" id="j2g-gK-swS"/>
                 <outlet property="containerView" destination="b2r-Ge-3dd" id="kkn-dG-FDg"/>
+                <outlet property="favoriteButton" destination="qhp-bG-BuW" id="gWp-eX-rOS"/>
                 <outlet property="jokeLabel" destination="uK1-L9-BxB" id="TxM-9b-T6j"/>
             </connections>
             <point key="canvasLocation" x="243.47826086956525" y="141.29464285714286"/>

@@ -6,11 +6,10 @@
 //
 
 import Foundation
+import BackgroundTasks
 
 public protocol JokersAPI {
     func loadJokes(completion:  @escaping ((Joke?, DownloadError?) -> Void))
-    var selectedCategory: Category? { get set }
-    var type: APIType { get }
 }
 
 public enum APIType: String, CaseIterable {
@@ -37,9 +36,10 @@ public enum APIType: String, CaseIterable {
 }
 
 public enum DownloadError: Error {
-  case statusNotOk
-  case decoderError
-  case error
+    case statusNotOk
+    case decoderError
+    case error
+    case apiThrottling(String)
     
     var description: String {
         switch self {
@@ -47,6 +47,8 @@ public enum DownloadError: Error {
             return "Something went wront with the API call!"
         case .decoderError:
             return "Something went wront with the Json decoder!"
+        case .apiThrottling(let apiName):
+            return "You riched the limit of jokes for the \(apiName) API"
         default:
             return "Something unexpected happened!"
         }
@@ -75,41 +77,46 @@ public class DaddysAPI: JokersAPI {
     }
 
     public static let shared = DaddysAPI()
-    public var selectedCategory: Category?
-    public var type: APIType = APIType.Daddys
     
     public func loadJokes(completion: @escaping ((Joke?, DownloadError?) -> Void)) {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data,
-                let httpResponse = response as? HTTPURLResponse,
-                    httpResponse.statusCode == 200 else {
-                            completion(nil, DownloadError.statusNotOk)
-                            return
+                
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 429 {
+                    completion(nil, DownloadError.apiThrottling("Daddy's"))
+                    return
                 }
-
-                do {
-                    #if TEST
-                    print(String(data: data, encoding: .utf8)!)
-                    #endif
-
-                    let jsonJoke = try JSONDecoder().decode(JSONJoke.self, from: data)
-
-                    guard let body = jsonJoke.body.first else {
-                        completion(nil, nil)
+            }
+            
+            guard let data = data,
+            let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200 else {
+                        completion(nil, DownloadError.statusNotOk)
                         return
-                    }
+            }
 
-                    let joke = Joke(style: .Daddys, id: body.id, setup: body.setup, punchLine: body.punchline, isFavorite: false)
+            do {
+                #if TEST
+                print(String(data: data, encoding: .utf8)!)
+                #endif
 
-                    completion(joke, nil)
-                } catch let error {
-                    debugPrint(error)
-                    completion(nil, DownloadError.decoderError)
+                let jsonJoke = try JSONDecoder().decode(JSONJoke.self, from: data)
+
+                guard let body = jsonJoke.body.first else {
+                    completion(nil, nil)
+                    return
                 }
+
+                let joke = Joke(style: .Daddys, id: body.id, setup: body.setup, punchLine: body.punchline, isFavorite: false, isBlocked: false)
+
+                completion(joke, nil)
+            } catch let error {
+                debugPrint(error)
+                completion(nil, DownloadError.decoderError)
+            }
         }
         task.resume()
-    }
-    
+    }    
 }
 
 

@@ -13,7 +13,8 @@ class SelectorTableViewCell: UITableViewCell {
     @IBOutlet weak var selectedCheckMarkImaveView: UIImageView!
     @IBOutlet weak var itemDescriptionLabel: UILabel!
     
-    public var isItemSelected = false {
+    public var toggleSelection: (() -> Void)?
+    public var isItemSelected = true {
         didSet {
             self.selectedCheckMarkImaveView.isHidden.toggle()
         }
@@ -23,6 +24,7 @@ class SelectorTableViewCell: UITableViewCell {
         itemDescriptionLabel.text = itemDescription
         selectedCheckMarkImaveView.isHidden = !isItemSelected
         iconImageView.image = UIImage(systemName: iconName)
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
     }
     
 }

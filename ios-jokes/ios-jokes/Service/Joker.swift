@@ -6,15 +6,28 @@
 //
 
 import Foundation
-
+import BackgroundTasks
 public class Joker {
-    
     private var currentJoke = 0
     private var selectedCategory: Category?
     private var jokesIds: [String] = []
     public static let shared = Joker()
     public var jokesList: [Joke] = []    
-    public let activeAPIList: [JokersAPI] = [ChuckNorrisAPI.shared] //, DaddysAPI.shared
+    public var activeAPIList: [APIType] = [.ChuckNorris,.Daddys]
+    
+    public func favorite(_ joke: Joke, isFavorite: Bool) {
+        guard let index = jokesList.firstIndex(of: joke) else {
+            return
+        }
+        jokesList[index].isFavorite = isFavorite
+    }
+    
+    public func block(_ joke: Joke, isBlocked: Bool) {
+        guard let index = jokesList.firstIndex(of: joke) else {
+            return
+        }
+        jokesList[index].isBlocked = isBlocked
+    }
     
     public func preFetchJokesIfNeeded(currentIndex: Int) {
         if currentIndex >= (jokesList.count - 3) {
@@ -25,9 +38,17 @@ public class Joker {
 
     public func fetchJokes(max: Int) {
         var numberOfCalls = max
-        guard let api = activeAPIList.randomElement() else {
+        guard let apiType = activeAPIList.randomElement() else {
             debugPrint("No API available")
             return
+        }
+        var api: JokersAPI
+        
+        switch apiType {
+        case .Daddys:
+            api = DaddysAPI.shared
+        case .ChuckNorris:
+            api = ChuckNorrisAPI.shared
         }
         
         if max > 30 {
@@ -37,14 +58,16 @@ public class Joker {
         for _ in 1...numberOfCalls {
             api.loadJokes { [weak self]
                 joke, error in
-                
                 guard let self = self else {
                     return
                 }
                 
                 guard let joke = joke else {
-                    if let error = error {
-                        debugPrint(error.description)
+                    switch error {
+                    case .apiThrottling(_):
+                        self.activeAPIList.removeAll(where: { $0 == .Daddys })
+                    default:
+                        print(error?.description ?? DownloadError.error.description)
                     }
                     return
                 }
@@ -60,6 +83,8 @@ public class Joker {
         }
         
     }
+    
+   
     
 }
 

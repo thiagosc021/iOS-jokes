@@ -15,12 +15,40 @@ class HomeViewController: UIViewController {
     private var collectionView: UICollectionView! = nil
     private let joker = Joker.shared
     private lazy var dataSource = configureDataSource()
-
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureNotificationConsumers()
         loadSnapshot()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if joker.jokesList.count > 0 {
+            refreshButton.isEnabled = false
+        }
+        
+    }
+    
+    @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
+        joker.fetchJokes(max: 1)
+    }
+    
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            print("all")
+        case 1:
+            print("favorites")
+        case 2:
+            print("blocked")
+        default:
+            break
+        }
     }
 }
 
@@ -85,6 +113,7 @@ private extension HomeViewController {
             }
             
             cell.model = joke
+            cell.delegate = self
             return cell
         }
         return dataSource
@@ -105,8 +134,16 @@ extension HomeViewController: UICollectionViewDataSourcePrefetching {
         guard let indexPath = indexPaths.last else {
             return
         }
-        joker.preFetchJokesIfNeeded(currentIndex: indexPath.item)        
+        joker.preFetchJokesIfNeeded(currentIndex: indexPath.item)
+    }
+}
+
+extension HomeViewController: JokeCollectionViewCellDelegate {
+    func favoriteTapped(joke: Joke, isFavorite: Bool) {
+        self.joker.favorite(joke, isFavorite: isFavorite)
     }
     
-    
+    func blockTapped(joke: Joke, isBlocked: Bool) {
+        self.joker.block(joke, isBlocked: isBlocked)
+    }
 }

@@ -28,6 +28,7 @@ public struct Joke: Hashable {
     var setup: String
     var punchLine: String
     var isFavorite: Bool
+    var isBlocked: Bool
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)

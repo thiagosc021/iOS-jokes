@@ -71,8 +71,6 @@ struct ChuckNorrisJoke: Decodable {
 }
 
 public class ChuckNorrisAPI: JokersAPI {
-   
-    
     
     private var urlComponents: URLComponents {
         var components = URLComponents()
@@ -89,19 +87,14 @@ public class ChuckNorrisAPI: JokersAPI {
     }
     
     public static let shared = ChuckNorrisAPI()
-    public var selectedCategory: Category?
-    public var type: APIType = APIType.ChuckNorris
+    public var selectedCategories: [Category] = Category.allCases
     
     public func loadJokes(completion: @escaping ((Joke?, DownloadError?) -> Void)) {
-        if let jokeCategory = selectedCategory {
-            executeGET(with: jokeCategory, completion: completion)
-        } else {
-            guard let jokeCategory = Category.allCases.randomElement() else {
-                completion(nil, DownloadError.error)
-                return
-            }
-            executeGET(with: jokeCategory, completion: completion)
+        guard let jokeCategory = selectedCategories.randomElement() else {
+            completion(nil, DownloadError.error)
+            return
         }
+        executeGET(with: jokeCategory, completion: completion)
     }
 }
 
@@ -122,7 +115,7 @@ private extension ChuckNorrisAPI {
 
                     let chuckNorrisJoke = try JSONDecoder().decode(ChuckNorrisJoke.self, from: data)
                     
-                    let joke = Joke(style: .ChuckNorris, id: chuckNorrisJoke.id, setup: chuckNorrisJoke.value, punchLine: "", isFavorite: false)
+                    let joke = Joke(style: .ChuckNorris, id: chuckNorrisJoke.id, setup: chuckNorrisJoke.value, punchLine: "", isFavorite: false, isBlocked: false)
 
                     completion(joke, nil)
                 } catch let error {

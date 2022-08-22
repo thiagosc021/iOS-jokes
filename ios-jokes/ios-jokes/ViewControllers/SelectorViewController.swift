@@ -27,9 +27,37 @@ extension SelectorViewController: UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? SelectorTableViewCell else {
             return
         }
-        
         cell.isItemSelected.toggle()
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        switch settingsType {
+        case .jokeCategory:
+            let category = Category.allCases[indexPath.item]
+            if ChuckNorrisAPI.shared.selectedCategories.count == 1 && ChuckNorrisAPI.shared.selectedCategories[0] == category {
+                cell.isItemSelected.toggle() //you need to have at least 1 category selected
+                return
+            }
+            if cell.isItemSelected {
+                ChuckNorrisAPI.shared.selectedCategories.append(category)
+            } else {
+                ChuckNorrisAPI.shared.selectedCategories.removeAll(where: { $0 == category })
+            }
+        case .jokeApi:
+            let api = APIType.allCases[indexPath.item]
+            if Joker.shared.activeAPIList.count == 1 && Joker.shared.activeAPIList[0] == api {
+                cell.isItemSelected.toggle() //you need to have at least 1 api selected
+                return
+            }
+            if cell.isItemSelected {
+                Joker.shared.activeAPIList.append(api)
+            } else {
+                Joker.shared.activeAPIList.removeAll(where: { $0 == api })
+            }
+        case .none:
+            return
+        
+        }
+        
+        
+        
     }
     
 }
@@ -61,7 +89,7 @@ extension SelectorViewController: UITableViewDataSource {
                 cell.configure(with: category.description, iconName: category.icon)
             case .jokeApi: 
                 let apiType = APIType.allCases[indexPath.item]
-                let isItemSelected = Joker.shared.activeAPIList.contains(where: { $0.type == apiType })
+                let isItemSelected = Joker.shared.activeAPIList.contains(where: { $0 == apiType })
                 cell.configure(with: apiType.description, iconName: apiType.icon, isItemSelected: isItemSelected)
             case .none: break
         }

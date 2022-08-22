@@ -30,6 +30,8 @@
 		78D0E65F289EEBD7008DA021 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E65E289EEBD7008DA021 /* String+Extensions.swift */; };
 		78D0E66228A1F902008DA021 /* SelectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E66028A1F902008DA021 /* SelectorTableViewCell.swift */; };
 		78D0E66328A1F902008DA021 /* SelectorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D0E66128A1F902008DA021 /* SelectorTableViewCell.xib */; };
+		78D0E66628A47BDF008DA021 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E66428A47BDF008DA021 /* SettingsTableViewCell.swift */; };
+		78D0E66728A47BDF008DA021 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D0E66528A47BDF008DA021 /* SettingsTableViewCell.xib */; };
 		78EF8C95289A0F0400ADEAB2 /* Joker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF8C94289A0F0400ADEAB2 /* Joker.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,8 @@
 		78D0E65E289EEBD7008DA021 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		78D0E66028A1F902008DA021 /* SelectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorTableViewCell.swift; sourceTree = "<group>"; };
 		78D0E66128A1F902008DA021 /* SelectorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectorTableViewCell.xib; sourceTree = "<group>"; };
+		78D0E66428A47BDF008DA021 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		78D0E66528A47BDF008DA021 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		78EF8C94289A0F0400ADEAB2 /* Joker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +194,8 @@
 				78D0E651289B6199008DA021 /* JokeCollectionViewCell.xib */,
 				78D0E66028A1F902008DA021 /* SelectorTableViewCell.swift */,
 				78D0E66128A1F902008DA021 /* SelectorTableViewCell.xib */,
+				78D0E66428A47BDF008DA021 /* SettingsTableViewCell.swift */,
+				78D0E66528A47BDF008DA021 /* SettingsTableViewCell.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -348,6 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78D0E66728A47BDF008DA021 /* SettingsTableViewCell.xib in Resources */,
 				784FE0E42898B1000021807B /* LaunchScreen.storyboard in Resources */,
 				78D0E66328A1F902008DA021 /* SelectorTableViewCell.xib in Resources */,
 				784FE0E12898B1000021807B /* Assets.xcassets in Resources */,
@@ -388,6 +395,7 @@
 				784FE1112898C1CA0021807B /* URLComponents+Extensions.swift in Sources */,
 				78D0E652289B6199008DA021 /* JokeCollectionViewCell.swift in Sources */,
 				78D0E66228A1F902008DA021 /* SelectorTableViewCell.swift in Sources */,
+				78D0E66628A47BDF008DA021 /* SettingsTableViewCell.swift in Sources */,
 				78D0E65F289EEBD7008DA021 /* String+Extensions.swift in Sources */,
 				784FE0D52898B0F90021807B /* AppDelegate.swift in Sources */,
 				78D0E659289EDB02008DA021 /* SettingsViewController.swift in Sources */,
@@ -582,7 +590,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "costa.thiago.com.ios-jokes";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thiago.costa.ios-jokes";
 				PRODUCT_NAME = Jokes;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -610,7 +618,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "costa.thiago.com.ios-jokes";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thiago.costa.ios-jokes";
 				PRODUCT_NAME = Jokes;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
