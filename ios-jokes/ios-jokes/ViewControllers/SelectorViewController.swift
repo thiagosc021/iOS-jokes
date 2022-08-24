@@ -8,8 +8,9 @@
 import UIKit
 
 class SelectorViewController: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
+    private let categoryModelController = CategoryModelController.shared
+    private let apiTypeModelController = ApiTypeModelController.shared
+    @IBOutlet private weak var tableView: UITableView!
     public var settingsType: Settings?
     
     override func viewDidLoad() {
@@ -31,29 +32,32 @@ extension SelectorViewController: UITableViewDelegate {
         switch settingsType {
         case .jokeCategory:
             let category = Category.allCases[indexPath.item]
-            if ChuckNorrisAPI.shared.selectedCategories.count == 1 && ChuckNorrisAPI.shared.selectedCategories[0] == category {
+            if categoryModelController.selectedCategories.count == 1 && categoryModelController.selectedCategories[0] == category {
                 cell.isItemSelected.toggle() //you need to have at least 1 category selected
                 return
             }
             if cell.isItemSelected {
-                ChuckNorrisAPI.shared.selectedCategories.append(category)
+                categoryModelController.selectCategory(category)
+                cell.selectItem()
             } else {
-                ChuckNorrisAPI.shared.selectedCategories.removeAll(where: { $0 == category })
+                categoryModelController.removeCategory(category)
+                cell.unselectItem()
             }
         case .jokeApi:
             let api = APIType.allCases[indexPath.item]
-            if Joker.shared.activeAPIList.count == 1 && Joker.shared.activeAPIList[0] == api {
+            if apiTypeModelController.activeAPIList.count == 1 && apiTypeModelController.activeAPIList[0] == api {
                 cell.isItemSelected.toggle() //you need to have at least 1 api selected
                 return
             }
             if cell.isItemSelected {
-                Joker.shared.activeAPIList.append(api)
+                apiTypeModelController.selectApi(api)
+                cell.selectItem()
             } else {
-                Joker.shared.activeAPIList.removeAll(where: { $0 == api })
+                apiTypeModelController.removeApi(api)
+                cell.unselectItem()
             }
-        case .none:
+        default:
             return
-        
         }
         
         
@@ -85,11 +89,12 @@ extension SelectorViewController: UITableViewDataSource {
         
         switch settingsType {
             case .jokeCategory:
-                let category = Category.allCases[indexPath.item]                
-                cell.configure(with: category.description, iconName: category.icon)
+                let category = Category.allCases[indexPath.item]
+                let isSelected = categoryModelController.isSelected(category)
+                cell.configure(with: category.description, iconName: category.icon, isItemSelected: isSelected)
             case .jokeApi: 
                 let apiType = APIType.allCases[indexPath.item]
-                let isItemSelected = Joker.shared.activeAPIList.contains(where: { $0 == apiType })
+            let isItemSelected = apiTypeModelController.isSelected(apiType)
                 cell.configure(with: apiType.description, iconName: apiType.icon, isItemSelected: isItemSelected)
             case .none: break
         }

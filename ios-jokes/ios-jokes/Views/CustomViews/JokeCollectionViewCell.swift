@@ -94,7 +94,7 @@ private extension JokeCollectionViewCell {
         isBlocked = model.isBlocked
         configureFavoriteButton()
         configureBlockButton()
-        //configureGradient()
+        configureGradient()
     }
     
     func toggleButton(with type: ButtonType, model: Joke) {

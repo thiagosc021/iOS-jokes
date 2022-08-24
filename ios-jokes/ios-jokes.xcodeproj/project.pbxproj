@@ -32,6 +32,11 @@
 		78D0E66328A1F902008DA021 /* SelectorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D0E66128A1F902008DA021 /* SelectorTableViewCell.xib */; };
 		78D0E66628A47BDF008DA021 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E66428A47BDF008DA021 /* SettingsTableViewCell.swift */; };
 		78D0E66728A47BDF008DA021 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78D0E66528A47BDF008DA021 /* SettingsTableViewCell.xib */; };
+		78D0E66928B5C255008DA021 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E66828B5C255008DA021 /* CoreDataStack.swift */; };
+		78D0E67028B6A5B3008DA021 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E66F28B6A5B3008DA021 /* CategoryModel.swift */; };
+		78D0E67328B6A70C008DA021 /* CategoryModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E67228B6A70C008DA021 /* CategoryModelController.swift */; };
+		78D0E67528B6AB75008DA021 /* ApiTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E67428B6AB75008DA021 /* ApiTypeModel.swift */; };
+		78D0E67828B6AB9F008DA021 /* ApiTypeModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E67728B6AB9F008DA021 /* ApiTypeModelController.swift */; };
 		78EF8C95289A0F0400ADEAB2 /* Joker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF8C94289A0F0400ADEAB2 /* Joker.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +87,11 @@
 		78D0E66128A1F902008DA021 /* SelectorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectorTableViewCell.xib; sourceTree = "<group>"; };
 		78D0E66428A47BDF008DA021 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		78D0E66528A47BDF008DA021 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
+		78D0E66828B5C255008DA021 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		78D0E66F28B6A5B3008DA021 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		78D0E67228B6A70C008DA021 /* CategoryModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModelController.swift; sourceTree = "<group>"; };
+		78D0E67428B6AB75008DA021 /* ApiTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTypeModel.swift; sourceTree = "<group>"; };
+		78D0E67728B6AB9F008DA021 /* ApiTypeModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTypeModelController.swift; sourceTree = "<group>"; };
 		78EF8C94289A0F0400ADEAB2 /* Joker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +147,7 @@
 				78E410DB289A0DF100D4DCFA /* ViewControllers */,
 				784FE10A2898C08A0021807B /* Service */,
 				784FE1072898C0550021807B /* Model */,
+				78D0E66C28B5C35C008DA021 /* ModelControllers */,
 				78EF8C93289A0EAF00ADEAB2 /* Extensions */,
 				78E410D8289A0CF000D4DCFA /* Resources */,
 			);
@@ -165,6 +176,8 @@
 			children = (
 				78E410D9289A0D3100D4DCFA /* CoreData */,
 				784FE1082898C0710021807B /* JokeModel.swift */,
+				78D0E66F28B6A5B3008DA021 /* CategoryModel.swift */,
+				78D0E67428B6AB75008DA021 /* ApiTypeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +213,15 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		78D0E66C28B5C35C008DA021 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				78D0E67228B6A70C008DA021 /* CategoryModelController.swift */,
+				78D0E67728B6AB9F008DA021 /* ApiTypeModelController.swift */,
+			);
+			path = ModelControllers;
+			sourceTree = "<group>";
+		};
 		78E410D8289A0CF000D4DCFA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				784FE0DD2898B0F90021807B /* ios_jokes.xcdatamodeld */,
+				78D0E66828B5C255008DA021 /* CoreDataStack.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -387,10 +410,13 @@
 				784FE0DF2898B0F90021807B /* ios_jokes.xcdatamodeld in Sources */,
 				78EF8C95289A0F0400ADEAB2 /* Joker.swift in Sources */,
 				78D0E657289CB4F7008DA021 /* NotificationName+Extension.swift in Sources */,
+				78D0E66928B5C255008DA021 /* CoreDataStack.swift in Sources */,
 				784FE10F2898C1870021807B /* ChuckNorrisAPI.swift in Sources */,
 				784FE0D92898B0F90021807B /* HomeViewController.swift in Sources */,
 				784FE1092898C0710021807B /* JokeModel.swift in Sources */,
 				78D0E65B289EE822008DA021 /* SelectorViewController.swift in Sources */,
+				78D0E67828B6AB9F008DA021 /* ApiTypeModelController.swift in Sources */,
+				78D0E67528B6AB75008DA021 /* ApiTypeModel.swift in Sources */,
 				784FE10C2898C0D70021807B /* DaddysAPI.swift in Sources */,
 				784FE1112898C1CA0021807B /* URLComponents+Extensions.swift in Sources */,
 				78D0E652289B6199008DA021 /* JokeCollectionViewCell.swift in Sources */,
@@ -399,8 +425,10 @@
 				78D0E65F289EEBD7008DA021 /* String+Extensions.swift in Sources */,
 				784FE0D52898B0F90021807B /* AppDelegate.swift in Sources */,
 				78D0E659289EDB02008DA021 /* SettingsViewController.swift in Sources */,
+				78D0E67028B6A5B3008DA021 /* CategoryModel.swift in Sources */,
 				784FE0D72898B0F90021807B /* SceneDelegate.swift in Sources */,
 				78D0E655289B64A0008DA021 /* UIView+Extensions.swift in Sources */,
+				78D0E67328B6A70C008DA021 /* CategoryModelController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

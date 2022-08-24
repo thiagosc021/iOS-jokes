@@ -12,29 +12,6 @@ public protocol JokersAPI {
     func loadJokes(completion:  @escaping ((Joke?, DownloadError?) -> Void))
 }
 
-public enum APIType: String, CaseIterable {
-    case Daddys
-    case ChuckNorris
-    
-    var description: String {
-        switch self {
-        case .Daddys:
-            return "Daddy's jokes API"
-        case .ChuckNorris:
-            return "Chuck Norris jokes API"
-        }
-    }
-    
-    var icon: String {
-        switch self {
-        case .Daddys:
-            return "brain.head.profile"
-        case .ChuckNorris:
-            return "bolt.fill"
-        }
-    }
-}
-
 public enum DownloadError: Error {
     case statusNotOk
     case decoderError

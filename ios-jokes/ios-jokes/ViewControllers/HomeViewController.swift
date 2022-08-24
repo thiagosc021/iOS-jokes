@@ -41,14 +41,15 @@ class HomeViewController: UIViewController {
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("all")
+            joker.applyFilter(.all)
         case 1:
-            print("favorites")
+            joker.applyFilter(.favorited)
         case 2:
-            print("blocked")
+            joker.applyFilter(.blocked)
         default:
             break
         }
+        loadSnapshot()
     }
 }
 
@@ -69,7 +70,7 @@ private extension HomeViewController {
                               bottom: self.view.bottomAnchor,
                               leading: self.view.leadingAnchor,
                               trailing: self.view.trailingAnchor,
-                              paddingTop: 100.0,
+                              paddingTop: 150.0,
                               paddingBottom: 25.0,
                               paddingLeft: 10.0,
                               paddingRight: 10.0)
@@ -77,6 +78,7 @@ private extension HomeViewController {
         collectionView.register(UINib(nibName: "JokeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: JokeCollectionViewCell.reuseIdentifier)
         collectionView.prefetchDataSource = self
         collectionView.delegate = self
+        collectionView.alwaysBounceVertical = false
     }
     
     func configureNotificationConsumers() {

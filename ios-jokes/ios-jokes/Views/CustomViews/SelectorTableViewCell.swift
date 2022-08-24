@@ -14,10 +14,14 @@ class SelectorTableViewCell: UITableViewCell {
     @IBOutlet weak var itemDescriptionLabel: UILabel!
     
     public var toggleSelection: (() -> Void)?
-    public var isItemSelected = true {
-        didSet {
-            self.selectedCheckMarkImaveView.isHidden.toggle()
-        }
+    public var isItemSelected = true 
+    
+    public func selectItem() {
+        self.selectedCheckMarkImaveView.isHidden = false
+    }
+    
+    public func unselectItem() {
+        self.selectedCheckMarkImaveView.isHidden = true
     }
     
     public func configure(with itemDescription: String, iconName: String, isItemSelected: Bool = true ) {
@@ -25,6 +29,7 @@ class SelectorTableViewCell: UITableViewCell {
         selectedCheckMarkImaveView.isHidden = !isItemSelected
         iconImageView.image = UIImage(systemName: iconName)
         self.selectionStyle = UITableViewCell.SelectionStyle.none
+        self.isItemSelected = isItemSelected
     }
     
 }
