@@ -11,15 +11,6 @@ import Foundation
 public enum JokeStyle {
     case ChuckNorris
     case Daddys
-    
-    var API_URL: String {
-        switch self {
-        case .ChuckNorris:
-            return ""
-        case .Daddys:
-            return ""
-        }
-    }
 }
 
 public struct Joke: Hashable {

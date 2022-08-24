@@ -63,6 +63,7 @@ class JokeCollectionViewCell: UICollectionViewCell {
             return
         }
         isFavorite.toggle()
+        blockButton.isEnabled = !isFavorite
         toggleButton(with: .favorite(selected: isFavorite), model: model)
         delegate?.favoriteTapped(joke: model, isFavorite: isFavorite)
     }
@@ -72,6 +73,7 @@ class JokeCollectionViewCell: UICollectionViewCell {
             return
         }
         isBlocked.toggle()
+        favoriteButton.isEnabled = !isBlocked
         toggleButton(with: .block(selected: isBlocked), model: model)
         delegate?.blockTapped(joke: model, isBlocked: isBlocked)
     }
@@ -79,7 +81,7 @@ class JokeCollectionViewCell: UICollectionViewCell {
 private extension JokeCollectionViewCell {
     func configureUI() {
         containerView.layer.cornerRadius = 20
-        containerView.backgroundColor = .white
+        //containerView.backgroundColor = .white
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = .zero
@@ -94,7 +96,7 @@ private extension JokeCollectionViewCell {
         isBlocked = model.isBlocked
         configureFavoriteButton()
         configureBlockButton()
-        configureGradient()
+        //configureGradient()
     }
     
     func toggleButton(with type: ButtonType, model: Joke) {
@@ -115,6 +117,7 @@ private extension JokeCollectionViewCell {
         guard let model = model else {
             return
         }
+        favoriteButton.isEnabled = !model.isBlocked
         toggleButton(with: .favorite(selected: model.isFavorite), model: model)
     }
     
@@ -122,6 +125,7 @@ private extension JokeCollectionViewCell {
         guard let model = model else {
             return
         }
+        blockButton.isEnabled = !model.isFavorite
         toggleButton(with: .block(selected: model.isBlocked), model: model)
     }
     
