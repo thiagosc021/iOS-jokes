@@ -38,6 +38,7 @@
 		78D0E67528B6AB75008DA021 /* ApiTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E67428B6AB75008DA021 /* ApiTypeModel.swift */; };
 		78D0E67828B6AB9F008DA021 /* ApiTypeModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D0E67728B6AB9F008DA021 /* ApiTypeModelController.swift */; };
 		78EF8C95289A0F0400ADEAB2 /* Joker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF8C94289A0F0400ADEAB2 /* Joker.swift */; };
+		78FD1F9828B8530700E0636D /* LocalJokeModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FD1F9728B8530700E0636D /* LocalJokeModelController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		78D0E67428B6AB75008DA021 /* ApiTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTypeModel.swift; sourceTree = "<group>"; };
 		78D0E67728B6AB9F008DA021 /* ApiTypeModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTypeModelController.swift; sourceTree = "<group>"; };
 		78EF8C94289A0F0400ADEAB2 /* Joker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joker.swift; sourceTree = "<group>"; };
+		78FD1F9728B8530700E0636D /* LocalJokeModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJokeModelController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 			children = (
 				78D0E67228B6A70C008DA021 /* CategoryModelController.swift */,
 				78D0E67728B6AB9F008DA021 /* ApiTypeModelController.swift */,
+				78FD1F9728B8530700E0636D /* LocalJokeModelController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				78D0E65B289EE822008DA021 /* SelectorViewController.swift in Sources */,
 				78D0E67828B6AB9F008DA021 /* ApiTypeModelController.swift in Sources */,
 				78D0E67528B6AB75008DA021 /* ApiTypeModel.swift in Sources */,
+				78FD1F9828B8530700E0636D /* LocalJokeModelController.swift in Sources */,
 				784FE10C2898C0D70021807B /* DaddysAPI.swift in Sources */,
 				784FE1112898C1CA0021807B /* URLComponents+Extensions.swift in Sources */,
 				78D0E652289B6199008DA021 /* JokeCollectionViewCell.swift in Sources */,

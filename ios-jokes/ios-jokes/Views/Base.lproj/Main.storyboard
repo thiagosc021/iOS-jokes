@@ -21,11 +21,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Mk6-Zn-FLE">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="R6e-gT-4D9">
-                            <connections>
-                                <action selector="refreshButtonTapped:" destination="BYZ-38-t0r" id="HUe-fu-AdI"/>
-                            </connections>
-                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ur5-hP-MjI">
                             <rect key="frame" x="93.5" y="5.5" width="227" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -46,7 +41,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="refreshButton" destination="R6e-gT-4D9" id="MGs-oW-DGi"/>
                         <outlet property="segmentControl" destination="ur5-hP-MjI" id="dcC-AB-fQJ"/>
                     </connections>
                 </viewController>

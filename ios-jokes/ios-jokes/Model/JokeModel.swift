@@ -6,9 +6,9 @@
 //
 
 import Foundation
+import CoreData
 
-
-public enum JokeStyle {
+public enum JokeStyle: String {
     case ChuckNorris
     case Daddys
 }
@@ -26,3 +26,15 @@ public struct Joke: Hashable {
     }
 }
 
+extension LocalJoke {
+    @discardableResult convenience init(joke: Joke, context: NSManagedObjectContext = CoreDataStack.context) {
+        self.init(context: context)
+        self.id = joke.id
+        self.style = joke.style.rawValue
+        self.setup = joke.setup
+        self.punchLine = joke.punchLine
+        self.isBlocked = joke.isBlocked
+        self.isFavorite = joke.isFavorite
+    }
+  
+}

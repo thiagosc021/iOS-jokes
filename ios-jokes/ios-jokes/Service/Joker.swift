@@ -15,12 +15,11 @@ public enum JokeListFilterType {
 }
 
 public class Joker {
-    private var currentJoke = 0
-    private var selectedCategory: Category?
     private var jokesIds: [String] = []
     private var allJokes: [Joke] = []
     private var activeFilter: JokeListFilterType = .all
     private var apiTypeModelController = ApiTypeModelController.shared
+    private var localJokeModelController = LocalJokeModelController.shared
     public static let shared = Joker()
     public var jokesList: [Joke] = []    
    
@@ -29,21 +28,26 @@ public class Joker {
         guard let index = jokesList.firstIndex(of: joke) else {
             return
         }
+        var joke = allJokes[index]
+        joke.isFavorite = isFavorite
+        localJokeModelController.updateJoke(joke)
         allJokes[index].isFavorite = isFavorite
-        
     }
     
     public func block(_ joke: Joke, isBlocked: Bool) {
         guard let index = jokesList.firstIndex(of: joke) else {
             return
         }
+        var joke = allJokes[index]
+        joke.isBlocked = isBlocked
+        localJokeModelController.updateJoke(joke)
         allJokes[index].isBlocked = isBlocked
     }
     
     public func preFetchJokesIfNeeded(currentIndex: Int) {
-        if currentIndex >= (jokesList.count - 3) && activeFilter == .all {
+        if currentIndex >= (jokesList.count - 1) && activeFilter == .all {            
             fetchJokes(max: 10)
-            debugPrint("prefetching jokes \(currentIndex), \(jokesList.count)")
+            debugPrint("prefetching jokes \(currentIndex), \(jokesList.count)")            
         }
     }
     
@@ -62,9 +66,26 @@ public class Joker {
             jokesList = allJokes
         }
     }
-
+    
+    func fetchLocal() -> Bool {
+        localJokeModelController.fetch()
+        localJokeModelController.jokesList.forEach { joke in
+            if !self.jokesIds.contains(where: { $0 == joke.id }) {
+                self.jokesIds.append(joke.id)
+                self.jokesList.append(joke)
+                self.allJokes.append(joke)
+            }
+        }
+        return self.jokesList.count > 0
+    }
+    
     public func fetchJokes(max: Int) {
         var numberOfCalls = max
+        
+        if max > 30 {
+            numberOfCalls = 30
+        }
+               
         guard let apiType = apiTypeModelController.activeAPIList.randomElement() else {
             debugPrint("No API available")
             return
@@ -77,11 +98,15 @@ public class Joker {
         case .ChuckNorris:
             api = ChuckNorrisAPI.shared
         }
-        
-        if max > 30 {
-            numberOfCalls = 30
-        }
-        
+              
+        fetchRemote(numberOfCalls, api)
+    }
+}
+
+private extension Joker {
+    
+    
+    func fetchRemote(_ numberOfCalls: Int, _ api: JokersAPI) {
         for _ in 1...numberOfCalls {
             api.loadJokes { [weak self]
                 joke, error in
@@ -104,15 +129,11 @@ public class Joker {
                         self.jokesIds.append(joke.id)
                         self.jokesList.append(joke)
                         self.allJokes.append(joke)
+                        self.localJokeModelController.saveJoke(joke)
                         NotificationCenter.default.post(name: .jokeDidAdd, object: self, userInfo: nil)
                     }
                 }
             }
         }
-        
     }
-    
-   
-    
 }
-

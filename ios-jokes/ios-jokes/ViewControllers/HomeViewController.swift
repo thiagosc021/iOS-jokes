@@ -15,29 +15,19 @@ class HomeViewController: UIViewController {
     private var collectionView: UICollectionView! = nil
     private let joker = Joker.shared
     private lazy var dataSource = configureDataSource()
-    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureNotificationConsumers()
-        loadSnapshot()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if joker.jokesList.count > 0 {
-            refreshButton.isEnabled = false
+        if joker.fetchLocal() {
+            loadSnapshot()
+        } else {
+            joker.fetchJokes(max: 10)
         }
-        
     }
-    
-    @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
-        joker.fetchJokes(max: 1)
-    }
-    
+
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -51,6 +41,7 @@ class HomeViewController: UIViewController {
         }
         loadSnapshot()
     }
+    var currentIndex = 0
 }
 
 private extension HomeViewController {
@@ -76,7 +67,6 @@ private extension HomeViewController {
                               paddingRight: 10.0)
         collectionView.layer.cornerRadius = 12
         collectionView.register(UINib(nibName: "JokeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: JokeCollectionViewCell.reuseIdentifier)
-        collectionView.prefetchDataSource = self
         collectionView.delegate = self
         collectionView.alwaysBounceVertical = false
     }
@@ -129,13 +119,8 @@ extension HomeViewController: UICollectionViewDelegate {
         //TODO: open action menu for that joke
         print("joke has been tapped")
     }
-}
-
-extension HomeViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        guard let indexPath = indexPaths.last else {
-            return
-        }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         joker.preFetchJokesIfNeeded(currentIndex: indexPath.item)
     }
 }
