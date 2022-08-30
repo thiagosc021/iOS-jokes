@@ -115,9 +115,10 @@ private extension HomeViewController {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        //TODO: open action menu for that joke
-        print("joke has been tapped")
+        guard let cell = collectionView.cellForItem(at: indexPath) as? JokeCollectionViewCell else {
+            return
+        }
+        cell.togglePunchLine()
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

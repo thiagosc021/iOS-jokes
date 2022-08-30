@@ -30,6 +30,7 @@ class JokeCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "joke-cell-reuse-identifier"
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var jokeLabel: UILabel!
+    @IBOutlet private weak var punchLineLabel: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
     @IBOutlet private weak var blockButton: UIButton!
     private var isFavorite = false
@@ -42,7 +43,7 @@ class JokeCollectionViewCell: UICollectionViewCell {
             configureUI()
         }
     }
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         configureUI()
@@ -50,7 +51,6 @@ class JokeCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        containerView.layer.sublayers?.first?.frame = containerView.bounds
     }
     
     override func prepareForReuse() {
@@ -58,6 +58,18 @@ class JokeCollectionViewCell: UICollectionViewCell {
         configureUI()
     }
     
+    public func togglePunchLine() {
+        if model?.style == .Daddys {
+            DispatchQueue.main.async {
+                UIView.transition(with: self.punchLineLabel, duration: 0.6,
+                                options: .transitionCrossDissolve,
+                                animations: {
+                                    self.punchLineLabel.isHidden.toggle()
+                            })
+            }
+        }
+    }
+
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         guard let model = model else {
             return
@@ -80,8 +92,8 @@ class JokeCollectionViewCell: UICollectionViewCell {
 }
 private extension JokeCollectionViewCell {
     func configureUI() {
+        punchLineLabel.isHidden = true
         containerView.layer.cornerRadius = 20
-        //containerView.backgroundColor = .white
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 1
         containerView.layer.shadowOffset = .zero
@@ -91,12 +103,23 @@ private extension JokeCollectionViewCell {
             return
         }
         
-        jokeLabel.text = "\(model.setup) <===> \(model.punchLine)"
+        let font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        
+        if model.style == .Daddys {
+            let punchLineColor = UIColor.gray
+            let punchLineAttributes:[NSAttributedString.Key: Any] = [.font: font, .foregroundColor: punchLineColor]
+            let attributedPunchLine = NSAttributedString(string: model.punchLine, attributes: punchLineAttributes)
+            punchLineLabel.attributedText = attributedPunchLine
+        }
+                
+        let color = UIColor.white
+        let setupAttributes:[NSAttributedString.Key: Any] = [.font: font, .foregroundColor: color]
+        let attributedSetup = NSAttributedString(string: model.setup, attributes: setupAttributes)
+        jokeLabel.attributedText = attributedSetup
         isFavorite = model.isFavorite
         isBlocked = model.isBlocked
         configureFavoriteButton()
         configureBlockButton()
-        //configureGradient()
     }
     
     func toggleButton(with type: ButtonType, model: Joke) {
